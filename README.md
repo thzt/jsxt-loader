@@ -1,34 +1,63 @@
-This is a webpack loader, it can be used to load `.jsxt` file.
+### 1. what is jsxt
 
-#### 1. what is a jsxt file
+`jsxt` is the template part of a React component.
 
-A `.jsxt` file is a jsx template file as follow, (like html)
-
-It is usually used in the `render` function of a React component,
-
-[babel](https://babeljs.io/) tranforms it to be `React.createElement(...)`.
-
-For example: `page.jsxt`
+For example, there is a React component called `Page`,
 
 ```
-<div>{T.message}</div>
+class Page extends Component {
+    ...
+
+    render() {
+        ...
+
+        return <div>{message}</div>;
+    }
+}
 ```
 
-The `jsxt-loader` will load this file to be a [functional React component](https://reactjs.org/docs/components-and-props.html#functional-and-class-components).
+The template part of `Page` is, `<div>{message}</div>`.
+
+### 2. how to import jsxt
+
+#### 2.1 import a jsx file as jsxt inline
+
+Let's create a file `./page.jsx`:
 
 ```
-import React from 'react';
-
-const Page = T => (
-    <div>{T.message}</div>
-);
+<div>{message}</div>
 ```
 
-`T` is the `namespace` option of `jsxt-loader`. (see the `webpack.config.js`)
+Then we can import the `.jsx` file inline,
 
-#### 2. config the namespace
+```
+// use `jsxt-loader` and `babel-loader` in order
+import Page from 'jsxt-loader!babel-loader!./page.jsx';
+```
 
-`webpack.config.js`,
+The source code in `./page.jsx` will be transformed to, 
+
+```
+const React = require('react');
+
+module.exports = props => {
+    with(props) {
+        return React.createElement(
+            "div",
+            null,
+            message
+        );
+    }
+}
+```
+
+and will export a [functional React component](https://reactjs.org/docs/components-and-props.html#functional-and-class-components).
+
+#### 2.2 import a jsxt file
+
+In order to import a `.jsxt` file, 
+
+we should config the webpack with `jsxt-loader` and `babel-loader` in `webpack.config.js`,
 
 ```
 ...
@@ -38,17 +67,7 @@ module.exports = {
         rules: [
             {
                 test: /\.jsxt$/,
-                use: [
-                    {
-                        loader: 'jsxt-loader',
-                        options: {
-                            namespace: 'T'
-                        }
-                    },
-                    {
-                        loader: 'babel-loader'
-                    }
-                ]
+                use: ['jsxt-loader', 'babel-loader']
             },
             ...
         ]
@@ -57,39 +76,30 @@ module.exports = {
 };
 ```
 
-#### 3. how to import a jsxt file
-
-`index.jsx`,
+Then we can import a `.jsxt` file directly,
 
 ```
-import React from 'react';
-import ReactDOM from 'react-dom';
+import Page from './page.jsxt';
+```
 
-// Page is a functional React component
+### 3. React components in jsxt
+
+If the `jsxt` contains another React componnet,
+
+```
+<div>
+    <Greeting />
+</div>
+```
+
+we can also pass `Greeting` by props.
+
+```
+import Greeting from './greeting.jsx';
 import Page from './page.jsxt';
 
 ReactDOM.render(
-    <Page message="Hello world!" />,
+    <Page Greeting={Greeting} />,
     document.getElementById('root')
 );
-```
-
-#### 4. pass React component as props
-
-`index.jsx`,
-```
-import Greeting from './greeting.jsx';
-
-ReactDOM.render(
-    <Page message="Hello world!" Greeting={Greeting} />,
-    document.getElementById('root')
-);
-```
-
-`page.jsxt`,
-```
-<div>
-    <T.Greeting />
-    <span>{T.message}</span>
-</div>
 ```
