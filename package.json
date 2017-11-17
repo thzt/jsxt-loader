@@ -19,8 +19,5 @@
   "bugs": {
     "url": "https://github.com/thzt/jsxt-loader/issues"
   },
-  "homepage": "https://github.com/thzt/jsxt-loader#readme",
-  "dependencies": {
-    "loader-utils": "^1.1.0"
-  }
+  "homepage": "https://github.com/thzt/jsxt-loader#readme"
 }
