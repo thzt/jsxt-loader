@@ -60,7 +60,7 @@ import Other from './other.jsx';
 
 // pass `Other` and `"Hello"` as prop values to `Page`.
 ReactDOM.render(
-    <Page Greeting={Other} text="Hello"  />,
+    <Page Greeting={Other} text="Hello" />,
     document.getElementById('root')
 );
 ```
