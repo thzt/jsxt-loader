@@ -22,7 +22,7 @@ The template part of `Page` is, `<div>{message}</div>`.
 
 #### 2.1 import a jsx file as jsxt inline
 
-Let's create a file `./page.jsx`: (please don't forget import `React`)
+Let's create a file `./page.jsx`: (**please don't forget import `React`**)
 
 ```
 import React from 'react';
@@ -98,3 +98,9 @@ import Greeting from './greeting.jsx';
 ```
 
 we can easily import `Greeting` at the head of the `jsxt` file.
+
+### 4. peerDependencies
+
+Because [React 16](https://reactjs.org/docs/react-without-es6.html) don't support `React.createClass` any more.
+
+So we must use `create-react-class` module to create React class on the fly.
