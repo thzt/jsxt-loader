@@ -104,3 +104,9 @@ we can easily import `Greeting` at the head of the `jsxt` file.
 Because [React 16](https://reactjs.org/docs/react-without-es6.html) don't support `React.createClass` any more.
 
 So we must use `create-react-class` module to create React class on the fly.
+
+When using `jsxt-loader`, we should install `create-react-class` to `devDependencies`, 
+
+```
+$ npm i --save-dev create-react-class
+```
