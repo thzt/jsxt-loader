@@ -1,6 +1,6 @@
 {
   "name": "jsxt-loader",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "jsx template loader",
   "main": "index.js",
   "scripts": {

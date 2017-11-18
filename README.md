@@ -87,19 +87,11 @@ import Page from './page.jsxt';
 If the `jsxt` contains another React componnet,
 
 ```
+import Greeting from './greeting.jsx';
+
 <div>
     <Greeting />
 </div>
 ```
 
-we can also pass `Greeting` by props.
-
-```
-import Greeting from './greeting.jsx';
-import Page from './page.jsxt';
-
-ReactDOM.render(
-    <Page Greeting={Greeting} />,
-    document.getElementById('root')
-);
-```
+we can easily import `Greeting` at the head of the `jsxt` file.
