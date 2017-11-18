@@ -10,7 +10,11 @@ module.exports = function (source) {
     // (1) we shouldn't use `import React from 'react';`
     // (2) we shouldn't use `module.exports = class extends React.component`
 
-    // 2. About functional React component
+    // 2. About `create-react-class`
+    // Because React 16 don't support `React.createClass` any more.
+    // So we must use `create-react-class` module to create class on the fly.
+
+    // 3. About functional React component
     // There would be a problem occurs, if we exports a functional React component.
     // Somebody may accidentally add `refs` to our exporting component,
     // given the error: `Stateless function components cannot have refs.`

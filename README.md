@@ -22,9 +22,11 @@ The template part of `Page` is, `<div>{message}</div>`.
 
 #### 2.1 import a jsx file as jsxt inline
 
-Let's create a file `./page.jsx`:
+Let's create a file `./page.jsx`: (please don't forget import `React`)
 
 ```
+import React from 'react';
+
 <div>{message}</div>
 ```
 
@@ -87,6 +89,7 @@ import Page from './page.jsxt';
 If the `jsxt` contains another React componnet,
 
 ```
+import React from 'react';
 import Greeting from './greeting.jsx';
 
 <div>
