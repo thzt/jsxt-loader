@@ -1,6 +1,6 @@
 {
   "name": "jsxt-loader",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "jsx template loader",
   "main": "index.js",
   "scripts": {
@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/thzt/jsxt-loader/issues"
   },
-  "homepage": "https://github.com/thzt/jsxt-loader#readme"
+  "homepage": "https://github.com/thzt/jsxt-loader#readme",
+  "peerDependencies": {
+    "create-react-class": "^15.6.2"
+  }
 }

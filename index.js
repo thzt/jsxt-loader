@@ -1,7 +1,7 @@
 module.exports = function (source) {
-    const regExp = /(['"]use strict['"];?)?([\s\S]*?)(React\.createElement\([\s\S]*\));$/;
+    const regExp = /^(['"]use strict['"];?)?([\s\S]*?)(.*\.createElement\([\s\S]*\));$/;
     const [_, strictMode, requireModules, createElement] = regExp.exec(source);
-    
+
     // 1. About strict mode
     // `with` statement can't be used in strict mode.
     // we shouldn't use ES6 syntax, as the ES6 code is default in strict mode.
@@ -18,10 +18,10 @@ module.exports = function (source) {
     // Therefore, we export a pseudo-functional component, 
     // it looks like a functional component but implemented by `React.createClass`.
     const target = `
-        const React = require('react'); 
         ${requireModules}
+        var createReactClass = require('create-react-class');
 
-        module.exports = React.createClass({
+        module.exports = createReactClass({
             render() {
                 with(this.props) {
                     return (${createElement});
